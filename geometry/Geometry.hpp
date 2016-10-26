@@ -6,10 +6,10 @@
 #define PROJECTS_GEOMETRY_HPP
 
 #include "GeometryCalculator.h"
-#include "Line.h"
-#include "LineSegment.h"
-#include "Ray.h"
-#include "SpatialTree.h"
-#include "Vector.h"
+//#include "Line.h"
+//#include "LineSegment.h"
+//#include "Ray.h"
+//#include "SpatialTree.h"
+//#include "Vector.h"
 
 #endif //PROJECTS_GEOMETRY_HPP

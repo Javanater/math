@@ -6,6 +6,5 @@
 #define PROJECTS_MATH_HPP
 
 #include "geometry/Geometry.hpp"
-#include "matrix/Matrix.h"
 
 #endif //PROJECTS_MATH_HPP
