@@ -8,7 +8,7 @@
 #ifndef LINE_H_
 #define LINE_H_
 
-#include "Vector.h"
+#include "GeometryCalculator.h"
 
 namespace flabs
 {
@@ -16,30 +16,46 @@ namespace flabs
 	class Line
 	{
 		private:
-			typedef Line<DIM, ValueType> Lne;
-			typedef Vector<DIM, ValueType> Vec;
+			typedef Line<DIM, ValueType>             Lne;
+			typedef Eigen::Matrix<ValueType, DIM, 0> Vec;
 
 		public:
 			Vec point;
 			Vec vector;
 
 		public:
-			Line() // Default
+			Line()
 			{
 			}
 
 			Line(const Vec& point, const Vec& vector) :
-					point(point), vector(vector) // Initializer
+				point(point), vector(vector)
 			{
 			}
 
-			Line(const Lne& line) :
-					point(line.point), vector(line.vector) // Copy
+			Line(const Lne& line) : point(line.point), vector(line.vector)
 			{
 			}
 
 			~Line()
 			{
+			}
+
+			inline IntersectionType intersect(const Lne& line, Vec& result)
+			{
+				return intersection(point, vector, line.point, line.vector,
+					result);
+			}
+
+			inline ValueType distance(const Lne& line)
+			{
+				ValueType        distance;
+				IntersectionType intersectionType =
+									 distance(point, vector, line.point,
+										 line.vector, distance);
+				if (intersectionType == NONE)
+					distance = std::numeric_limits<ValueType>::infinity();
+				return distance;
 			}
 	};
 

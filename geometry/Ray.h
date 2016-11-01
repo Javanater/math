@@ -8,7 +8,6 @@
 #ifndef RAY_H_
 #define RAY_H_
 
-#include "Vector.h"
 #include "GeometryCalculator.h"
 #include "LineSegment.h"
 
@@ -18,8 +17,9 @@ namespace flabs
 	class Ray
 	{
 		private:
-			typedef Ray<DIM, ValueType>     Ry;
-			typedef Vector <DIM, ValueType> Vec;
+			typedef Ray<DIM, ValueType>              Ry;
+			typedef LineSegment<DIM, ValueType>      Seg;
+			typedef Eigen::Matrix<ValueType, DIM, 0> Vec;
 
 		public:
 			Vec start;
@@ -30,13 +30,13 @@ namespace flabs
 			{
 			}
 
-			Ray(const Vec start, const Vec normalizedDirection) : start(start),
-				normalizedDirection(normalizedDirection)
+			Ray(const Vec start, const Vec normalizedDirection) :
+				start(start), normalizedDirection(normalizedDirection)
 			{
 			}
 
-			Ray(const Ry& ray) : start(ray.start),
-				normalizedDirection(ray.normalizedDirection)
+			Ray(const Ry& ray) :
+				start(ray.start), normalizedDirection(ray.normalizedDirection)
 			{
 			}
 
@@ -45,7 +45,7 @@ namespace flabs
 			}
 
 			IntersectionType
-			distance(const LineSegment <DIM, ValueType>& segment,
+			distance(const LineSegment<DIM, ValueType>& segment,
 				ValueType& distance) const
 			{
 				Vec              intersection;

@@ -8,10 +8,10 @@ set(SOURCE_FILES
 		geometry/GeometryCalculator.cpp
 		geometry/GeometryCalculator.h
 		#		geometry/GeometryCalculatorOld.h
-		#		geometry/Line.h
-		#		geometry/LineSegment.h
+		geometry/Line.h
+		geometry/LineSegment.h
 		#		geometry/Pose.hpp
-		#		geometry/Ray.h
+		geometry/Ray.h
 		#		geometry/SpatialTree.h
 		#[[geometry/Vector.h]])
 add_library(${PROJECT_NAME} ${SOURCE_FILES})

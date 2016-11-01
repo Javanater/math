@@ -17,7 +17,7 @@ namespace flabs
 {
 	enum IntersectionType
 	{
-		INTERSECT, COINCIDENT, NONE
+		NONE = 0, INTERSECT = 1, COINCIDENT = 2
 	};
 
 	std::ostream&
@@ -46,9 +46,9 @@ namespace flabs
 	}
 
 	//TODO: Templatize, so all dimensions are optimized at compile time.
-	template<class T, class Scaler = typename T::Scalar>
+	template<class T, class Scalar = typename T::Scalar>
 	inline T orthogonal(const T& v,
-		Scaler tolerance = std::numeric_limits<Scaler>::epsilon() * 4)
+		Scalar tolerance = std::numeric_limits<Scalar>::epsilon() * 4)
 	{
 		if (T::RowsAtCompileTime == 2)
 			return orthogonal2d(v);
@@ -60,7 +60,7 @@ namespace flabs
 
 			for (int skip = 0; skip < T::RowsAtCompileTime; ++skip)
 			{
-				Scaler   sum = 0;
+				Scalar   sum = 0;
 				for (int i   = 0; i < T::RowsAtCompileTime; ++i)
 				{
 					if (i != skip)
@@ -81,17 +81,17 @@ namespace flabs
 	 * Calculates the intersection type between 2 infinitely long, bidirectional
 	 * lines.
 	 */
-	template<class T, class Scaler = typename T::Scalar>
+	template<class T, class Scalar = typename T::Scalar>
 	IntersectionType
 	intersects(const T& p1, const T& v1, const T& p2, const T& v2,
-		Scaler tolerance = std::numeric_limits<Scaler>::epsilon() * 4)
+		Scalar tolerance = std::numeric_limits<Scalar>::epsilon() * 4)
 	{
 		T      n2          = orthogonal(v2);
-		Scaler denominator = v1.dot(n2);
+		Scalar denominator = v1.dot(n2);
 
 		if (std::abs(denominator) <= tolerance)
 		{
-			Scaler numerator = (p2 - p1).dot(n2);
+			Scalar numerator = (p2 - p1).dot(n2);
 			if (std::abs(numerator) <= tolerance)
 				return COINCIDENT;
 			else
@@ -106,14 +106,14 @@ namespace flabs
 	 * This is useful for when you do not care about the intersection point,
 	 * because it is never calculated. The distance is in units of ||v1||.
 	 */
-	template<class T, class Scaler = typename T::Scalar>
+	template<class T, class Scalar = typename T::Scalar>
 	IntersectionType
-	distance(const T& p1, const T& v1, const T& p2, const T& v2, Scaler& result,
-		Scaler tolerance = std::numeric_limits<Scaler>::epsilon() * 4)
+	distance(const T& p1, const T& v1, const T& p2, const T& v2, Scalar& result,
+		Scalar tolerance = std::numeric_limits<Scalar>::epsilon() * 4)
 	{
 		T      n2          = orthogonal(v2);
-		Scaler denominator = v1.dot(n2);
-		Scaler numerator   = (p2 - p1).dot(n2);
+		Scalar denominator = v1.dot(n2);
+		Scalar numerator   = (p2 - p1).dot(n2);
 
 		if (std::abs(denominator) <= tolerance)
 		{
@@ -134,14 +134,14 @@ namespace flabs
 	 * Calculates the intersection between 2 infinitely long, bidirectional
 	 * lines.
 	 */
-	template<class T, class Scaler = typename T::Scalar>
+	template<class T, class Scalar = typename T::Scalar>
 	IntersectionType
 	intersection(const T& p1, const T& v1, const T& p2, const T& v2, T& result,
-		Scaler tolerance = std::numeric_limits<Scaler>::epsilon() * 4)
+		Scalar tolerance = std::numeric_limits<Scalar>::epsilon() * 4)
 	{
 		T      n2          = orthogonal(v2);
-		Scaler denominator = v1.dot(n2);
-		Scaler numerator   = (p2 - p1).dot(n2);
+		Scalar denominator = v1.dot(n2);
+		Scalar numerator   = (p2 - p1).dot(n2);
 
 		if (std::abs(denominator) <= tolerance)
 		{
@@ -151,7 +151,7 @@ namespace flabs
 				return NONE;
 		}
 
-		result = p1 + (v1 * (numerator / denominator));
+		result = p1 + v1 * (numerator / denominator);
 		return INTERSECT;
 	}
 
@@ -193,21 +193,22 @@ namespace flabs
 
 	/**
 	 * Calculates the intersection between 2 infinitely long, bidirectional
-	 * lines, and the distance from p1 along the first line to the second line.
-	 * The distances are in units of ||v1||, and ||v2|| respectively.
-	 * This is useful because the distance is calculated as an intermediary
+	 * lines, and the distance from p1 along the first line to the second line,
+	 * and the distance from p2 along the second line to the first line. The
+	 * distances are in units of ||v1||, and ||v2|| respectively. This is useful
+	 * because the distance is calculated as an intermediary
 	 * anyway, so if you wanted this distance, and did not use this function you
 	 * would have to calculate the distance again.
 	 */
-	template<class T, class Scaler = typename T::Scalar>
+	template<class T, class Scalar = typename T::Scalar>
 	IntersectionType
-	intersectionDistance(T& p1, T& v1, T& p2, T& v2, T& result, Scaler& d1,
-		Scaler& d2,
-		Scaler tolerance = std::numeric_limits<Scaler>::epsilon() * 4)
+	intersectionDistance(T& p1, T& v1, T& p2, T& v2, T& result, Scalar& d1,
+		Scalar& d2,
+		Scalar tolerance = std::numeric_limits<Scalar>::epsilon() * 4)
 	{
 		T      n2          = orthogonal(v2);
-		Scaler denominator = v1.dot(n2);
-		Scaler numerator   = (p2 - p1).dot(n2);
+		Scalar denominator = v1.dot(n2);
+		Scalar numerator   = (p2 - p1).dot(n2);
 
 		if (std::abs(denominator) <= tolerance)
 		{

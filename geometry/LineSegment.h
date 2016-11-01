@@ -16,8 +16,8 @@ namespace flabs
 	class LineSegment
 	{
 		private:
-			typedef LineSegment<DIM, ValueType> Lne;
-			typedef Vector <DIM, ValueType>     Vec;
+			typedef LineSegment<DIM, ValueType>      Lne;
+			typedef Eigen::Matrix<ValueType, DIM, 0> Vec;
 
 		public:
 			Vec start;
