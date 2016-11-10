@@ -7,7 +7,6 @@ set(SOURCE_FILES
 		geometry/Geometry.hpp
 		geometry/GeometryCalculator.cpp
 		geometry/GeometryCalculator.h
-		#		geometry/GeometryCalculatorOld.h
 		geometry/Line.h
 		geometry/LineSegment.h
 		#		geometry/Pose.hpp
