@@ -12,6 +12,6 @@ set(SOURCE_FILES
 		geometry/ReferenceFrame.hpp
 		geometry/Ray.h
 		#		geometry/SpatialTree.h
-		#[[geometry/Vector.h]]  geometry/ReferenceFrame2d.hpp)
+		#[[geometry/Vector.h]]  )
 add_library(${PROJECT_NAME} ${SOURCE_FILES})
 
