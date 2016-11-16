@@ -25,6 +25,7 @@ namespace flabs
 		public:
 			ReferenceFrame(Ref* parent = nullptr) : parent(parent)
 			{
+				transformationMatrix.setIdentity();
 			}
 
 			template<uint32_t U = DIM,
@@ -39,6 +40,10 @@ namespace flabs
 				transformationMatrix(2, 0) = 0;
 				transformationMatrix(2, 1) = 0;
 				transformationMatrix(2, 2) = 1;
+			}
+
+			virtual ~ReferenceFrame()
+			{
 			}
 
 			Tran getOffsetFromWorld() const
@@ -59,10 +64,19 @@ namespace flabs
 				ReferenceFrame::parent = parent;
 			}
 
-//			Vec getPosition()
-//			{
-//				transformationMatrix.block<Vec, DIM, 1>(0, 2);
-//			}
+			Vec getTranslationOffset()
+			{
+				return transformationMatrix.block<DIM, 1>(0, 2);
+			}
+
+			Vec getWorldPosition()
+			{
+				if (parent)
+					return (parent->getOffsetFromWorld() * transformationMatrix)
+						.block<DIM, 1>(0, 2);
+				else
+					return transformationMatrix.block<DIM, 1>(0, 2);
+			}
 
 			inline ValueType getXOffset() const
 			{
