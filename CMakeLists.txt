@@ -10,6 +10,7 @@ set(SOURCE_FILES
 		geometry/Line.h
 		geometry/LineSegment.h
 		geometry/ReferenceFrame.hpp
+		geometry/ReferencePoint.hpp
 		geometry/Ray.h
 		#		geometry/SpatialTree.h
 		#[[geometry/Vector.h]]  )
