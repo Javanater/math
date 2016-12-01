@@ -11,20 +11,20 @@
 namespace flabs
 {
 /**
- * Helper function, not intended for external use
+ * Computes a^2
  *
  * @tparam T
  * @param t
  * @return
  */
 template<class T>
-inline T hypotH(const T t)
+inline T sumSquares(const T t)
 {
 	return t * t;
 }
 
 /**
- * Helper function, not intended for external use
+ * Computes a^2 + b^2 + ...
  *
  * @tparam T
  * @tparam Args
@@ -33,9 +33,9 @@ inline T hypotH(const T t)
  * @return
  */
 template<class T, class... Args>
-inline T hypotH(const T t, const Args ... args)
+inline T sumSquares(const T t, const Args ... args)
 {
-	return t * t + hypotH<Args...>(args...);
+	return t * t + sumSquares<Args...>(args...);
 }
 
 /**
@@ -50,7 +50,7 @@ inline T hypotH(const T t, const Args ... args)
 template<class T, class... Args>
 inline T hypot(const T t, const Args ... args)
 {
-	return std::sqrt(hypotH<T, Args...>(t, args...));
+	return std::sqrt(sumSquares<T, Args...>(t, args...));
 }
 
 /**
@@ -67,6 +67,12 @@ inline T unsignedMod(T a, T b)
 	return a - floor(a / b) * b;
 }
 
+template<class T>
+inline T zeroTo2Pi(T a)
+{
+	return unsignedMod<T>(a, boost::math::constants::two_pi<T>());
+}
+
 /**
  * Computes the smallest difference between angles a and b within the range
  * [-pi, pi).
@@ -79,9 +85,51 @@ inline T unsignedMod(T a, T b)
 template<class T>
 inline T angleDifference(T a, T b)
 {
-	double r = a - b;
-	r = unsignedMod<T>(r + boost::math::constants::pi<T>(),
-		boost::math::constants::two_pi<T>()) - boost::math::constants::pi<T>();
+	a   = zeroTo2Pi<T>(a);
+	b   = zeroTo2Pi<T>(b);
+	T r = a - b;
+	if (r >= boost::math::constants::pi<T>())
+		r -= boost::math::constants::two_pi<T>();
+	else if (r < -boost::math::constants::pi<T>())
+		r += boost::math::constants::two_pi<T>();
+	return r;
+}
+
+/**
+ * Computes the smallest difference between inputs a and b within the range
+ * [min, max).
+ *
+ * @tparam T: the data type
+ * @tparam min: minimum of interval inclusive
+ * @tparam max: maximum of interval exclusive
+ * @param a: first measure
+ * @param b: second measure
+ * @return a - b [min, max)
+ */
+template<class T>
+inline T intervalDifference(T a, T b, T min, T max)
+{
+	T r = a - b;
+	r = unsignedMod<T>(r - min, max - min) + min;
+	return r;
+}
+
+/**
+ * Computes the smallest difference between inputs a and b within the range
+ * [min, max).
+ *
+ * @tparam T: the data type
+ * @tparam min: minimum of interval inclusive
+ * @tparam max: maximum of interval exclusive
+ * @param a: first measure
+ * @param b: second measure
+ * @return a - b [min, max)
+ */
+template<class T, T min, T max>
+inline T intervalDifference(T a, T b)
+{
+	T r = a - b;
+	r = unsignedMod<T>(r - min, max - min) + min;
 	return r;
 }
 }
