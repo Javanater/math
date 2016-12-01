@@ -132,6 +132,12 @@ inline T intervalDifference(T a, T b)
 	r = unsignedMod<T>(r - min, max - min) + min;
 	return r;
 }
+
+template<class T>
+inline bool within(T a, T b, T t)
+{
+	return std::abs(a - b) <= t;
+}
 }
 
 #endif //PROJECTS_MATH_HPP
