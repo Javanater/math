@@ -11,8 +11,8 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include "Vector.h"
-#include "Ray.h"
-#include "GeometryCalculator.h"
+#include "Ray.hpp"
+#include "GeometryCalculator.hpp"
 
 namespace flabs
 {

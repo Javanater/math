@@ -5,7 +5,7 @@
  *      Author: Madison
  */
 
-#include "GeometryCalculator.h"
+#include "GeometryCalculator.hpp"
 
 namespace flabs
 {

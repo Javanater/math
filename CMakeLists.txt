@@ -6,12 +6,12 @@ set(SOURCE_FILES
 		#geometry
 		geometry/Geometry.hpp
 		geometry/GeometryCalculator.cpp
-		geometry/GeometryCalculator.h
-		geometry/Line.h
-		geometry/LineSegment.h
+		geometry/GeometryCalculator.hpp
+		geometry/Line.hpp
+		geometry/LineSegment.hpp
 		geometry/ReferenceFrame.hpp
 		geometry/ReferencePoint.hpp
-		geometry/Ray.h
+		geometry/Ray.hpp
 		#		geometry/SpatialTree.h
 		#[[geometry/Vector.h]]  )
 add_library(${PROJECT_NAME} ${SOURCE_FILES})

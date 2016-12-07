@@ -5,7 +5,7 @@
 #ifndef PROJECTS_GEOMETRY_HPP
 #define PROJECTS_GEOMETRY_HPP
 
-#include "GeometryCalculator.h"
+#include "GeometryCalculator.hpp"
 //#include "Line.h"
 //#include "LineSegment.h"
 //#include "Ray.h"

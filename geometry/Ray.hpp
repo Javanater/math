@@ -8,8 +8,8 @@
 #ifndef RAY_H_
 #define RAY_H_
 
-#include "GeometryCalculator.h"
-#include "LineSegment.h"
+#include "GeometryCalculator.hpp"
+#include "LineSegment.hpp"
 
 namespace flabs
 {

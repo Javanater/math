@@ -8,7 +8,7 @@
 #ifndef LINE_H_
 #define LINE_H_
 
-#include "GeometryCalculator.h"
+#include "GeometryCalculator.hpp"
 
 namespace flabs
 {
