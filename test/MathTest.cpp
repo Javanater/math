@@ -16,7 +16,7 @@ using flabs::hypot;
 TEST(MathTest, angleDifference)
 {
 	ASSERT_EQ(0, angleDifference(0, 0));
-	ASSERT_EQ(pi<double>(), angleDifference(pi<double>(), 0.));
+	ASSERT_EQ(-pi<double>(), angleDifference(pi<double>(), 0.));
 	ASSERT_EQ(0, angleDifference(two_pi<double>(), 0.));
 	ASSERT_EQ(0, angleDifference(2 * two_pi<double>(), 0.));
 	ASSERT_NEAR(0.1, angleDifference(0., two_pi<double>() - .1), 1e-9);

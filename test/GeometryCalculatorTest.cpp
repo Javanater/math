@@ -28,7 +28,7 @@ TEST(GeometryCalculatorTest, 3d_orthogonal)
 		Vector3d vector           = Vector3d::Random();
 		Vector3d orthogonalVector = orthogonal(vector);
 		ASSERT_LE(vector.dot(orthogonalVector),
-			numeric_limits<double>::epsilon());
+			numeric_limits<double>::epsilon() * 2);
 	}
 }
 
