@@ -19,7 +19,7 @@ namespace flabs
 		private:
 			typedef Ray<DIM, ValueType>              Ry;
 			typedef LineSegment<DIM, ValueType>      Seg;
-			typedef Eigen::Matrix<ValueType, DIM, 0> Vec;
+			typedef Vector<DIM, ValueType> Vec;
 
 		public:
 			Vec start;

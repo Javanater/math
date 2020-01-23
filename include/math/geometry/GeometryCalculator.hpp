@@ -202,7 +202,7 @@ namespace flabs
 	 */
 	template<class T, class Scalar = typename T::Scalar>
 	IntersectionType
-	intersectionDistance(T& p1, T& v1, T& p2, T& v2, T& result, Scalar& d1,
+	intersectionDistance(T const& p1, T const& v1, T const& p2, T const& v2, T& result, Scalar& d1,
 		Scalar& d2,
 		Scalar tolerance = std::numeric_limits<Scalar>::epsilon() * 4)
 	{

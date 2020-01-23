@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 
+include_guard(GLOBAL)
+
 project(Math)
 
 set(SOURCE_FILES
